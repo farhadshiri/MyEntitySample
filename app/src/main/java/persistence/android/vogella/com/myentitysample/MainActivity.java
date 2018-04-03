@@ -12,7 +12,6 @@ import persistence.android.vogella.com.myentitysample.dao.Trophy;
 import persistence.android.vogella.com.myentitysample.dao.User;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-    private User user;
     private AppDatabase database;
 
     @Override
@@ -27,7 +26,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         List<User> users = database.userDao().getAllUser();
         if (users.size()==0) {
             database.userDao().addUser(new User(1, "Test 1", 1));
-            user = database.userDao().getAllUser().get(0);
+            User user = database.userDao().getAllUser().get(0);
             user.level = 1;
             Trophy trophy = new Trophy(user.id, "Learned to use 3");
             database.trophyDao().addTrophy(trophy);
@@ -48,9 +47,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         List<Trophy> trophiesForUser = database.trophyDao().findTrophiesForUser(user.get(1).id);
         //TextView textView = findViewById(R.id.result);
         Toast.makeText(this, user.get(1).name + " Skill points " + user.get(1).skillPoints + " Trophys " + trophiesForUser.get(0).description, Toast.LENGTH_LONG).show();
-        if (user.size()>0){
-           // textView.setText(user.get(0).name + " Skill points " + user.get(0).skillPoints + " Trophys " + trophiesForUser.size() );
-        }
+        //if (user.size()>0){
+        //    textView.setText(user.get(0).name + " Skill points " + user.get(0).skillPoints + " Trophys " + trophiesForUser.size() );
+       // }
     }
 
     @Override
